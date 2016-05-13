@@ -15,6 +15,19 @@ angular.module('checklist', ['ionic', 'ngCordova', 'ngStorage'])
         if (window.StatusBar) {
             StatusBar.styleDefault();
         }
+
+        if (ionic.Platform.isAndroid()) {
+            admobid = { // for Android
+                banner: 'ca-app-pub-9807241074508080/6909980408' // Change this to your Ad Unit Id for banner...
+            };
+
+            if (AdMob)
+                AdMob.createBanner({
+                    adId: admobid.banner,
+                    position: AdMob.AD_POSITION.BOTTOM_CENTER,
+                    autoShow: true
+                });
+        }
         
     });
 
@@ -110,6 +123,7 @@ angular.module('checklist', ['ionic', 'ngCordova', 'ngStorage'])
         $scope.editTaskInput.taskComments = null;
     }
 
+    
 })
 
 //Detail View Controller (to get a task and comments)

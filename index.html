@@ -14,6 +14,7 @@
     <script src="lib/ionic/js/ionic.bundle.js"></script>
 
     <!-- cordova scripts (this will be a 404 during development) -->
+    <script src="lib/angular-admob/angular-admob.js"></script>
     <script src="lib/ngstorage/ngStorage.js"></script>
     <script src="lib/ngCordova/dist/ng-cordova.js"></script>
     <script src="cordova.js"></script>
@@ -36,6 +37,7 @@
       
       <!-- Main Task View -->
       <script id="tasks" type="text/ng-template">
+          
           <ion-view>
               <ion-nav-buttons side="secondary">
                   <button class="button ion-edit" ng-click="openNewTask()"></button>
@@ -49,7 +51,6 @@
                        </ion-item>
                   </ion-list>
               </ion-content>
-
           </ion-view>
       </script>
 
