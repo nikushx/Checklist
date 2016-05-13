@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <script src="js/platformOverrides.js"></script>
+    
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <!-- cordova scripts (this will be a 404 during development) -->
+    <script src="lib/ngstorage/ngStorage.js"></script>
+    <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+    <script src="cordova.js"></script>
+
+    <!-- the app's js -->
+    <script src="js/app.js"></script>
+  </head>
+  <body ng-app="checklist">
+
+    <ion-pane>
+       
+      <ion-nav-bar class="bar-positive">
+          <ion-nav-title><span class="ion-android-checkmark-circle"> List</span></ion-nav-title>
+          <ion-nav-back-button>
+          </ion-nav-back-button>
+      </ion-nav-bar>
+
+      <ion-nav-view>
+      </ion-nav-view>
+      
+      <!-- Main Task View -->
+      <script id="tasks" type="text/ng-template">
+          <ion-view>
+              <ion-nav-buttons side="secondary">
+                  <button class="button ion-edit" ng-click="openNewTask()"></button>
+              </ion-nav-buttons>
+              <ion-content class="has-header padding">
+                  <ion-list>
+                      <ion-item ng-repeat="task in tasks track by $index" href="#/{{task.id}}">
+                          {{task.name}}
+                          <ion-option-button class="button-balanced" ng-click="openEditTask(task)">Edit</ion-option-button>
+                          <ion-option-button class="button-assertive" ng-click="deleteTask(task)">Delete</ion-option-button>
+                       </ion-item>
+                  </ion-list>
+              </ion-content>
+
+          </ion-view>
+      </script>
+
+      <!-- Task Detail View -->
+      <script id="taskDetail" type="text/ng-template">
+          <ion-view>
+              <ion-content class="has-header padding">
+                  <ion-list>
+                      <ion-item>
+                            <b><span class="ion-clipboard"></span> Task</b><hr style="background-color:lightblue;color:lightgray;border-style:dashed"/>{{task.name}}
+                      </ion-item>
+                      <ion-item>
+                            <b><span class="ion-chatbox-working"></span> Comments</b><hr style="background-color:lightblue;color:lightgray;border-style:dashed" />{{task.comment}}
+                      </ion-item>
+                      
+                  </ion-list>
+              </ion-content>
+          </ion-view>
+      </script>
+
+      <!-- New Task Modal -->
+      <script id="newTaskModal" type="text/ng-template">
+          <ion-modal-view>
+              <ion-header-bar class="bar-calm">
+                  <h1 class="title">New Task</h1>
+                  <button class="button button-icon ion-ios-close-empty" ng-click="closeNewTask()"></button>
+              </ion-header-bar>
+              <ion-content class="padding">
+
+                  <div class="list">
+                      <form name="newTaskForm" ng-submit="newTask()">
+                          <label class="item item-input item-stacked-label">
+                              <span class="input-label">Task</span>
+                              <input type="text" ng-model="newTaskInput.taskName"/>
+                          </label>
+                          <label class="item item-input item-stacked-label">
+                              <span class="input-label">Comments</span>
+                              <textarea ng-model="newTaskInput.taskComments"></textarea>
+                          </label>
+                          <button class="button button-block button-positive">Create Task</button>
+                      </form>
+                  </div>
+
+              </ion-content>
+          </ion-modal-view>
+      </script>
+
+        <!-- Edit Task Modal -->
+        <script id="editTaskModal" type="text/ng-template">
+            <ion-modal-view>
+                <ion-header-bar class="bar-calm">
+                    <h1 class="title">Edit Task</h1>
+                    <button class="button button-icon ion-ios-close-empty" ng-click="closeEditTask()"></button>
+                </ion-header-bar>
+                <ion-content class="padding">
+
+                    <div class="list">
+                        <form name="newTaskForm" ng-submit="editTask(task)">
+                            <label class="item item-input item-stacked-label">
+                                <span class="input-label">Task</span>
+                                <input type="text" ng-model="editTaskInput.taskName" />
+                            </label>
+                            <label class="item item-input item-stacked-label">
+                                <span class="input-label">Comments</span>
+                                <textarea ng-model="editTaskInput.taskComments"></textarea>
+                            </label>
+                            <button class="button button-block button-positive">Finish Edit</button>
+                        </form>
+                    </div>
+
+                </ion-content>
+            </ion-modal-view>
+        </script>
+
+    </ion-pane>
+  </body>
+</html>
